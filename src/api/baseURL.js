@@ -1,6 +1,16 @@
-export default function getBaseURL() {
-	const isInDev = window.location.hostname === 'localhost';
-
-	//If it's in development, url will point to mock API. If it's in production, url will point to production API that's set up in Express
-	return isInDev ? 'http://localhost:3001/' : '/';
+export default function getBaseUrl() {
+	return getQueryStringParameterByName('useMockAPI') ? 'http://localhost:3001/' : '/';
 }
+
+function getQueryStringParameterByName(name, url) {
+	if(!url) url = window.location.href;
+	name = name.replace(/[\[\]]/g, "\\$&");
+
+	var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		results = regex.exec(url);
+
+	if(!results) return null;
+	if(!results[2]) return '';
+	return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
