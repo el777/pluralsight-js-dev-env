@@ -1,5 +1,5 @@
 export default function getBaseUrl() {
-	return getQueryStringParameterByName('useMockAPI') ? 'http://localhost:3001/' : '/';
+	return getQueryStringParameterByName('useMockAPI') ? 'http://localhost:3001/' : 'https://aqueous-chamber-49284.herokuapp.com/';
 }
 
 function getQueryStringParameterByName(name, url) {
@@ -13,4 +13,3 @@ function getQueryStringParameterByName(name, url) {
 	if(!results[2]) return '';
 	return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-
